@@ -11,6 +11,8 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 
 app.use(express.static(__dirname));  
 app.use(express.static(__dirname + "/Game Code"));  
+app.use(express.static(__dirname + "/views"));  
+app.use(express.static(__dirname + "/scripts"));  
 
 // app.get('/', function(req, res,next) {  
 //     res.sendFile(__dirname + '/index2.html');
