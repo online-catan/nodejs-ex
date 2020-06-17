@@ -1,4 +1,4 @@
-const RESOURCE_NAMES = ["Hay", "Wood", "Rock", "Clay", "Sheep"];
+const RESOURCE_NAMES = ["Hay there", "Wood", "Rock", "Clay", "Sheep"];
 const PURCHASE_ROAD_REQ_RESOURCES = {Hay: 0, Wood: 1, Rock: 0, Clay: 1, Sheep: 0};
 const PURCHASE_SETTLEMENT_REQ_RESOURCES = {Hay: 1, Wood: 1, Rock: 0, Clay: 1, Sheep: 1};
 const PURCHASE_CITY_REQ_RESOURCES = {Hay: 2, Wood: 0, Rock: 3, Clay: 0, Sheep: 0};
