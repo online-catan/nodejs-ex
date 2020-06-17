@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: apps.openshift.io/v1
+    kind: DeploymentConfig
+    metadata:
+      name: nodejs-ex
+      namespace: catan-online
+      labels:
+        project: nodejs-ex
+        version: 0.0.1
+        provider: nodeshift
+        app: nodejs-ex
+        app.kubernetes.io/name: nodejs
+        app.kubernetes.io/component: nodejs-ex
+        app.kubernetes.io/instance: nodejs-ex
+        app.openshift.io/runtime: nodejs
+      annotations:
+        nodeshift/git-branch: master
+        nodeshift/git-commit: be0fdb63723b00de8c7f8d3254b671a2e46667fe
+    spec:
+      replicas: 1
+      revisionHistoryLimit: 2
+      selector:
+        app: nodejs-ex
+        project: nodejs-ex
+        provider: nodeshift
+      triggers:
+        - type: ConfigChange
+        - type: ImageChange
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - nodejs-ex
+            from:
+              kind: ImageStreamTag
+              namespace: catan-online
+              name: 'nodejs-ex:latest'
+      template:
+        metadata:
+          labels:
+            project: nodejs-ex
+            version: 0.0.1
+            provider: nodeshift
+            app: nodejs-ex
+          annotations:
+            nodeshift/git-branch: master
+            nodeshift/git-commit: be0fdb63723b00de8c7f8d3254b671a2e46667fe
+        spec:
+          containers:
+            - image: nodejs-ex
+              name: nodejs-ex
+              securityContext:
+                privileged: false
+              ports:
+                - containerPort: 8080
+                  name: http
+                  protocol: TCP
+              env: []
+  - apiVersion: v1
+    kind: Service
+    spec:
+      selector:
+        project: nodejs-ex
+        provider: nodeshift
+      ports:
+        - protocol: TCP
+          port: 8080
+          targetPort: 8080
+          name: http
+      type: ClusterIP
+    metadata:
+      name: nodejs-ex
+      namespace: catan-online
+      labels:
+        project: nodejs-ex
+        version: 0.0.1
+        provider: nodeshift
+        app.kubernetes.io/name: nodejs
+        app.kubernetes.io/component: nodejs-ex
+        app.kubernetes.io/instance: nodejs-ex
+        app.openshift.io/runtime: nodejs
+      annotations:
+        nodeshift/git-branch: master
+        nodeshift/git-commit: be0fdb63723b00de8c7f8d3254b671a2e46667fe
