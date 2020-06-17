@@ -14,9 +14,9 @@ app.use(express.static(__dirname + "/Game Code"));
 app.use(express.static(__dirname + "/views"));  
 app.use(express.static(__dirname + "/scripts"));  
 
-// app.get('/', function(req, res,next) {  
-//     res.sendFile(__dirname + '/index2.html');
-// });
+app.get('/', function(req, res,next) {  
+    res.sendFile(__dirname + '/index.html');
+});
 
 app.get('/guest', function(req, res,next) {  
     res.sendFile(__dirname + '/guest.html');
